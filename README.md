@@ -1,84 +1,286 @@
-# CEFmart
+# CEFMART – Staging Testing & Validation Guide  
+**Prepared by Alpha N&S Technologies**  
+**RC: 8289090**  
+**Date: 27 February 2026**
 
-CEFmart Stakeholder Meeting Report
-Date: December 16, 2025 Venue: CEFTER Attendees: Key stakeholders from Universities, Banks, Farmer Associations, Legal Advisers, Industry Partners, and Government Agencies
+---
 
-STAKEHOLDER INPUTS, QUESTIONS AND COLLABORATIONS.
+## 📌 Overview
 
-1.  VC’s Verdict
-Vice-Chancellor (Presented by the Deputy Vice-Chancellor)
-The Vice-Chancellor, represented by the Deputy Vice-Chancellor, opened the meeting by commending the quality and vision of the CEFmart platform. Key points highlighted include:
-* The presentation and concept of CEFmart were described as excellent.
-* Emphasis on communicating platform benefits effectively to grassroots users, particularly market women, local traders, and smallholder farmers.
-* Operations were identified as a critical pillar for sustainability, requiring proper planning in sourcing, logistics, and market access.
-* Strong awareness creation and research on product categories are essential.
-* Most importantly, the platform should carry local farmers and traders along, ensuring inclusion and trust-building, as this was identified as the number one priority for adoption.
+This document provides the official **Staging Testing & Validation Guidelines** for stakeholders conducting structured testing of the **CEFMART Application** prior to production deployment.
 
-2. Stakeholder Inputs and Questions
-2.1 Benuelinks (Logistics & Risk Management)
-Questions Raised:
-1. Logistics Coverage: Will operations be state-based or nationwide? Verdict from Alpha by Mr. Kator: Initially within the state; nationwide expansion planned as the platform grows.
-2. Emergency Management and Delays: How will emergencies and delays be controlled for products traveling long distances? Verdict our Center Director Prof. Igbum: Collaborate with corporations and authorities (state police, road inspection agencies) to allow flexibility for marked deliveries; legal frameworks and privacy claims will be put in place.
-3. Payment Disbursement: How fast will payments be disbursed to customers if delivery fails or products are reformed? Verdict Orbunde B. Aondofa: Payment speed depends on insurance coverage; customers will be informed of product status at all times.
-4. Mode of Transportation: What transportation models will be adopted? Verdict Adeke M. Samuel: Mode of transportation will align with product category, distance, and risk considerations within the platform logistics framework.
+It defines:
 
-2.2 Novus Microfinance Bank (Novus MFB)
-Remarks & Inputs:
-* Highlighted the need for financing of product sales for petty traders and smallholder farmers.
-* Emphasized product rating and data tracking for credit assessment and monitoring trader performance.
-* Expressed willingness to leverage platform data for financing and supporting traders.
-* Proposed cooperative partnerships with farmers and rural traders to improve adoption.
-* Noted the transformation in POS and e-extension services, highlighting access to seeds, inputs, and verified vendors.
-* Confirmed readiness for formal collaboration once CEFmart is operational.
+- Environment configuration
+- Scope of testing
+- Security boundaries
+- Infrastructure limitations
+- Testing duration policy
+- Production transition process
 
-2.3 Bank of Agriculture (BoA)
-Remarks & Inputs:
-* Provides account-opening services for fundraising (corporate and individual accounts).
-* Encouraged the CEFmart team to meet formally to initiate financing arrangements once the platform is ready.
-* Highlighted the bank’s ability to support agricultural value chains through targeted financial services.
+This README should be treated as the authoritative reference during staging validation.
 
-2.4 Rice Farmers Association of Nigeria (RFAN)
-Remarks & Inputs:
-* Storage Practices: Examine how farmers store produce to preserve quality and market value.
-* Middlemen Sales Dynamics: Understand farmer and middleman behavior for fair and transparent trade.
-* Product Quality & Weight Integrity: Platform should enforce accurate measurement and prevent unethical practices (e.g., adding stones to increase weight).
-* Vendor Facilities: Vendors should have necessary capacity to maintain product quality.
-Verdict / Response Prince Ijiir and Anjila.T:
-* Collaboration with warehouses to support proper storage and handling.
-* Deployment of Product Officers and Product Regulatory Officers, trained to oversee product quality, ensure standards, and monitor compliance across the platform.
+---
 
-2.5 Legal Advisory
-Guidance Provided:
-To operate a legally compliant and credible platform, the following steps were recommended:
-1. Register with the Corporate Affairs Commission (CAC).
-2. Implement warehousing standards to ensure product safety and quality.
-3. Draft comprehensive Terms and Conditions outlining platform usage, responsibilities, and dispute resolution.
-4. Document scope of activities and operational procedures.
-5. Create a Privacy Policy / Privacy Statement to protect user data.
-6. Obtain approved government operational certificates to validate platform operations.
-Purpose: Ensure legal compliance, accountability, trust, and investor readiness.
+# 🏗 Environment Status
 
-3. Summary of Key Decisions & Next Steps
-1. Operations & Awareness: Begin with state-level logistics and expand nationwide gradually. Implement strong awareness programs and grassroots engagement.
-2. Financing: Partner with Novus MFB, Bank of Agriculture, and cooperatives for microfinance and sales support.
-3. Product Quality: Collaborate with warehouses, deploy Product Officers, and enforce measurement and quality standards.
-4. Legal Compliance: Complete CAC registration, publish T&Cs and privacy statements, ensure operational certification.
-5. Technology & Data: Leverage platform data for trader assessment, product ratings, and monitoring of financial and operational performance.
-6. Stakeholder Engagement: Continue partnerships with farmers’ associations, banks, logistics providers, and government authorities to strengthen adoption and compliance.
+## Current Deployment: **STAGING (Development Mode)**
 
-4. Conclusion
-The first stakeholder gathering of CEFmart successfully provided:
-* Critical operational, financial, legal, and industry insights.
-* Agreement on priority actions for product quality, logistics, financing, and compliance.
-* Clear next steps for partnerships, regulatory compliance, and platform readiness.
-The meeting set a strong foundation for platform launch, scale-up, and sustainable adoption, emphasizing the importance of inclusivity, transparency, and adherence to legal and operational standards.
+The application is **NOT running in production**.
 
-Prepared by: Adeke Msonter Samuel / Alpha N&S Technologies. Date: December 16, 2025
+Staging allows:
 
+- Full functional testing
+- Simulated financial transactions
+- Workflow validation
+- Role-based testing (User / Vendor / Admin)
 
+Staging restricts:
 
+- Real financial processing
+- Production API key usage
+- Live merchant integration
+- Sensitive environment exposure
 
+---
 
+# 🔐 Infrastructure Configuration
 
+## 1️⃣ Payment Gateways
 
+The following are configured in **Test Mode**:
+
+- **Paystack (Test Keys Only)**
+- **Flutterwave (Test Keys Only)**
+
+Test keys:
+- Simulate transactions
+- Do not process real money
+- Do not settle to live merchant accounts
+
+⚠ Production payment keys are secured and will only be deployed in the live environment.
+
+---
+
+## 2️⃣ Database & Backend – Supabase
+
+Staging uses:
+
+- Supabase Test Project URL
+- Supabase anon (public) test key
+- Restricted service role access
+- Test database records
+
+Production-level credentials:
+- Service role keys
+- Elevated database privileges
+- Production storage access
+
+These remain protected and undisclosed during staging.
+
+---
+
+## 3️⃣ Authentication – Clerk
+
+Staging uses:
+
+- Clerk Test Publishable Key
+- Clerk Test Secret Key
+- Development JWT configuration
+
+Production authentication secrets are not deployed in this environment.
+
+---
+
+## 4️⃣ Server & Environment Variables
+
+The following remain secured:
+
+- `.env` production variables
+- Live payment API keys
+- Supabase production service role keys
+- Clerk production secrets
+- Webhook signing secrets
+- Admin-level credentials
+
+These will only be injected during production deployment.
+
+---
+
+# 🌐 Domain & SSL Limitation
+
+The current staging environment:
+
+- Is not deployed under the final production domain
+- Does not carry full production-grade SSL certification
+- Is not linked to live financial monitoring accounts
+
+Because of this:
+
+- Live keys cannot be injected
+- Real financial transactions are disabled
+- Sensitive infrastructure remains isolated
+
+This is standard security practice.
+
+---
+
+# ✅ Scope of Testing
+
+Stakeholders are expected to test all modules within staging.
+
+## 👤 User Module
+- Registration
+- Login
+- Email verification flow
+- Authentication redirects
+
+## 🏪 Vendor Module
+- Vendor onboarding
+- Store setup
+- Profile configuration
+
+## 📦 Product Management
+- Add product
+- Edit product
+- Delete product
+- Upload images
+
+## 🛒 Checkout & Payments (Simulated Only)
+- Cart functionality
+- Checkout workflow
+- Test payment simulation
+
+## 📊 Order Management
+- Order creation
+- Status updates
+- Refund logic
+- Tracking workflow
+
+## 📝 Complaints & Grievance System
+- Complaint submission
+- Admin resolution flow
+- Status tracking
+
+## 🛠 Admin Dashboard
+- Monitor users
+- Monitor vendors
+- Monitor transactions (test transactions only)
+
+---
+
+# 🔒 Data & Security Policy During Testing
+
+During staging:
+
+- Only test/dummy data must be used
+- No real financial information should be entered
+- No production keys should be requested
+- No external merchant accounts should be connected
+
+All production credentials remain under secure infrastructure managed by **Alpha N&S Technologies**.
+
+---
+
+# ⏳ Testing Window
+
+The staging testing window is strictly limited to:
+
+> **Maximum: 72 Hours**
+
+Reason:
+
+- Temporary environment
+- Limited SSL configuration
+- Security isolation from production
+- Time-sensitive deployment schedule
+
+Extended sandbox use is not permitted.
+
+---
+
+# 🚀 Transition to Production
+
+Upon testing approval:
+
+1. Production domain will be activated
+2. Full SSL certification will be configured
+3. Live payment keys will be injected
+4. Supabase production project will be connected
+5. Clerk production authentication will be activated
+6. Joint financial monitoring account (Alpha + CEFTER) will be linked
+
+Only after this process will real financial transactions be enabled.
+
+---
+
+# 🏢 Deployment Experience Reference
+
+This is not our first commerce deployment.
+
+Under our e-commerce arm, we operate:
+
+- **Cityhackz**  
+  https://www.cityhackz.com.ng  
+
+- **Vendoor by Cityhackz**  
+  https://vendoor.cityhackz.com.ng  
+
+These platforms reflect our production-grade deployment standards.
+
+---
+
+# 📋 Stakeholder Responsibilities During Testing
+
+Stakeholders are required to:
+
+- Test all assigned modules thoroughly
+- Document bugs clearly and structurally
+- Provide consolidated feedback
+- Avoid fragmented or repeated requests
+- Respect infrastructure security boundaries
+
+Operational entanglements or delayed responses may affect go-live timelines.
+
+---
+
+# ⚠ Important Clarification
+
+### Staging Allows:
+- Functional validation
+- Workflow verification
+- Role-based access testing
+- Business logic validation
+- System stability checks
+
+### Staging Restricts:
+- Real financial transactions
+- Production API keys
+- Live merchant integration
+- Sensitive environment exposure
+
+This separation protects:
+
+- Financial integrity
+- Data security
+- Compliance requirements
+- Platform stability
+
+---
+
+# 📞 Support & Contact
+
+For clarification during testing:
+**alphanstech@cityhackz.com.ng**
+**Alpha N&S Technologies**  
+RC: 8289090  
+
+---
+
+## Prepared By
+
+**Adeke Msonter Samuel**  
+Alpha N&S Technologies  
+
+🔗 https://adekems.vercel.app/
 
