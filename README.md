@@ -270,9 +270,8 @@ This separation protects:
 ### Test link:
 - Find attached the testing link
 
-[(https://stagingcefmart.vercel.app/)]
-This separation protects::
----
+(https://stagingcefmart.vercel.app/)
+
 
 # 📞 Support & Contact
 
