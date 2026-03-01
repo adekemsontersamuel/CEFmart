@@ -267,10 +267,10 @@ This separation protects:
 - Platform stability
 
 
-### Testilink:
+### Test link:
 - Find attached the testing link
-https://cefmart-test.vercel.app/
 
+[(https://stagingcefmart.vercel.app/)]
 This separation protects::
 ---
 
